@@ -93,4 +93,60 @@
 """
 
 def gaussj(A,B):
-    pass
+    NMAX = 50
+    IPIV = [0]*NMAX
+    INDXR = [0]*NMAX
+    INDXC = [0]*NMAX
+    icol, irow = 0, 0
+    
+    for i in range(len(A)):
+        big = 0
+        for j in range(len(A)):
+            if IPIV[j] != 1:
+                for k in range(len(A)):
+                    if IPIV[k] == 0:
+                        if abs(A[j][k]) >= big:
+                            big = abs(A[j][k])
+                            irow = j
+                            icol = k
+                    elif IPIV[k] > 1:
+                        print('Singular matrix')
+        IPIV[icol] = IPIV[icol] + 1
+        if irow != icol:
+            for l in range(len(A)):
+                dum = A[irow][l]
+                A[irow][l] = A[icol][l]
+                A[icol][l] = dum
+            for l in range(len(B)):
+                dum = B[irow][l]
+                B[irow][l] = B[icol][l]
+                B[icol][l] = dum
+        
+        INDXR[i] = irow
+        INDXC[i] = icol
+        if A[icol][icol] == 0:
+            print('Singular matrix')
+        PIVINV = 1/A[icol][icol]
+        A[icol][icol] = 1
+        
+        for l in range(len(A)):
+            A[icol][l] = A[icol][l]*PIVINV
+            
+        for l in range(len(A)):
+            B[icol][l] = B[icol][l]*PIVINV
+        
+        for ll in range(len(A)):
+            if ll != icol:
+                dum = A[ll][icol]
+                A[ll][icol] = 0
+                for l in range(len(A)):
+                    A[ll][l] = A[ll][l] - A[icol][l]*dum
+                for l in range(len(B)):
+                    B[ll][l] = B[ll][l] - B[icol][l]*dum
+    for l in range(len(A)-1, -1, -1):
+        if INDXR[l] != INDXC[l]:
+            for k in range(len(A)):
+                dum = A[k][INDXR[l]]
+                A[k][INDXR[l]] = A[k][INDXC[l]]
+                A[k][INDXC[l]] = dum
+                

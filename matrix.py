@@ -39,6 +39,9 @@ class Matrix:
             return False
         return all(self.data[i][j] == other.data[i][j] for j in range(self.cols) for i in range(self.rows))
     
+    def __len__(self):
+        return self.rows
+    
     def transpose(self):
         return Matrix([[self.data[j][i] for j in range(self.rows)] for i in range(self.cols)])
     
@@ -48,11 +51,19 @@ class Matrix:
     def col(self, idx):
         return [row[idx] for row in self.data]
     
-    
+from Chapter2.gaussj import gaussj    
 if __name__ == "__main__":
-    m1 = Matrix([[1,2,3],[4,5,6],[7,8,9]])
-    m2 = Matrix([[9,8,7],[6,5,4],[3,2,1]])
-    m3 = Matrix([[1,2],[3,4],[5,6]])
-    m4 = Matrix([[1,2,3],[4,5,6]])
-    print(m3 * m4)
+    m1 = Matrix([
+        [2, 1, -1],
+        [-3, -1, 2],
+        [-2, 1, 2]
+    ])
+    m2 = Matrix([
+        [8, -11, -3],
+        [1, 1, 1],
+        [2, 2, 2]
+    ])
+    gaussj(m1, m2)
+    print(m1)
+    print(m2)
     

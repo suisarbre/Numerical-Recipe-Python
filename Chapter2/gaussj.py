@@ -111,6 +111,7 @@ def gaussj(A,B):
                             icol = k
                     elif IPIV[k] > 1:
                         print('Singular matrix')
+                        return
         IPIV[icol] = IPIV[icol] + 1
         if irow != icol:
             for l in range(len(A)):
@@ -126,6 +127,7 @@ def gaussj(A,B):
         INDXC[i] = icol
         if A[icol][icol] == 0:
             print('Singular matrix')
+            return
         PIVINV = 1/A[icol][icol]
         A[icol][icol] = 1
         

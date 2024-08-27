@@ -1,4 +1,4 @@
-    """
+"""
     SUBROUTINE GAUSSJ (A,N,NP,B,M,MP)
         Linier equation solution by Gauss-Jordan elimination, equation (2.1.1) above.
         A is an input matrix of N by N elements, stored in an array of physical dimensions NP by NP.
@@ -90,6 +90,7 @@
     24 CONTINUE
     RETURN
     END
-    """
+"""
 
-
+def gaussj(A,B):
+    pass

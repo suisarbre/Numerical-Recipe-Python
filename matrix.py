@@ -51,6 +51,13 @@ class Matrix:
     def col(self, idx):
         return [row[idx] for row in self.data]
     
+    
+    def random(self,max_val = 100):
+        from random import randint
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.data[i][j] = randint(0,max_val)
+    
 from Chapter2.gaussj import gaussj    
 if __name__ == "__main__":
     m1 = Matrix([
@@ -59,11 +66,15 @@ if __name__ == "__main__":
         [-2, 1, 2]
     ])
     m2 = Matrix([
-        [8, -11, -3],
-        [1, 1, 1],
-        [2, 2, 2]
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
     ])
     gaussj(m1, m2)
-    print(m1)
-    print(m2)
-    
+    print( m1 )
+    print( m2 )
+    m1.random()
+    m2.random()
+    gaussj(m1, m2)
+    print( m1 )
+    print( m2 )

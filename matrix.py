@@ -6,6 +6,7 @@ class Matrix:
         
         if not all(len(row) == self.cols for row in data):
             raise ValueError("Inconsistent row lengths")
+    
         
     def __str__(self):
         return '\n'.join(' '.join(str(cell) for cell in row) for row in self.data)
@@ -56,7 +57,7 @@ class Matrix:
         from random import randint
         for i in range(self.rows):
             for j in range(self.cols):
-                self.data[i][j] = randint(0,max_val)
+                self.data[i][j] = randint(-max_val,max_val)
     
 from Chapter2.gaussj import gaussj    
 if __name__ == "__main__":
@@ -70,11 +71,19 @@ if __name__ == "__main__":
         [0, 1, 0],
         [0, 0, 1]
     ])
-    gaussj(m1, m2)
-    print( m1 )
-    print( m2 )
-    m1.random()
-    m2.random()
-    gaussj(m1, m2)
-    print( m1 )
-    print( m2 )
+    # gaussj(m1, m2)
+    # print( m1 )
+    # print( m2 )
+    # m1.random()
+    # m2.random()
+    # gaussj(m1, m2)
+    # print( m1 )
+    # print( m2 )
+    m3 = Matrix([
+        ['a', 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ])
+    print(m3)
+    m3.random()
+    print(m3)
